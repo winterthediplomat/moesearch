@@ -11,9 +11,9 @@ class ExceptionFactory(object):
     #print("[ExceptionFactory.generateException] error_dict", error_dict)
     #print(type(error_dict))
     if error_dict["error"] == "No board selected.":
-      return BoardNotFound()
+      return BoardNotFound("You have not selected a board, or the board you're looking for does not exist")
     else:
-      return GenericError()
+      return GenericError("Ehm... Please, go search some Jibril posts on /a/ while I figure it out.")
 
 class ArchiveException(Exception):
   pass
