@@ -1,0 +1,18 @@
+#!/usr/bin/python3
+
+import moesearch
+import sys
+import argparse
+
+parser = argparse.ArgumentParser(description="Search on archive.moe")
+parser.add_argument("--subject", help="the subject you're looking for")
+parser.add_argument("--board", default="a", help="the board you want to search on.")
+parser.add_argument("--text", help="the text you want to look for")
+
+args = parser.parse_args(sys.argv[1:])
+posts = moesearch.search(**vars(args))
+
+for post in posts:
+  print(post.num, "on", post.board.short_name)
+  print(post.comment)
+  print("-----------------------------------")
