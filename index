@@ -1,8 +1,20 @@
 #!/usr/bin/python3
 
 import moesearch
+import sys
+S = sys.argv
 
-res = moesearch.index("a", 1)
+try:
+  res = moesearch.index(S[1], S[2])
+except moesearch.exceptions.ArchiveException as e:
+  print(">$year >breaking moesearch: ", e)
+  sys.exit(1)
 
-for thread_num in res:
-  print(thread_num, res)
+for thread_num, index_res in res.items():
+  print(thread_num, index_res.op.comment)
+  try:
+    print("it has", len(list(index_res.posts)), "posts!")
+  except TypeError:
+    print("it has no posts!")
+  if(index_res.op.media):
+    print(index_res.op.media.media_link)
