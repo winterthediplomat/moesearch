@@ -12,4 +12,9 @@ retrieve_board = lambda url: re.findall("/(\w+)/thread", url)[0]
 #print( retrieve_post_num(S[1]) )
 #print( retrieve_board(S[1]) )
 
-print(moesearch.thread(retrieve_board(S[1]), retrieve_post_num(S[1])))
+thread = moesearch.thread(retrieve_board(S[1]), retrieve_post_num(S[1]))
+
+print("(%s)"%thread.op.thread_num, thread.op.name, "wrote:", thread.op.comment)
+print(len(thread.posts), "commented this post!")
+for post in thread.posts:
+  print("(%s)"%post.num, post.name, "commented:", post.comment)
