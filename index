@@ -1,0 +1,8 @@
+#!/usr/bin/python3
+
+import moesearch
+
+res = moesearch.index("a", 1)
+
+for thread_num in res:
+  print(thread_num, res)

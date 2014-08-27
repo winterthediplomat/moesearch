@@ -1,0 +1,25 @@
+#!/usr/bin/python3
+
+from pprint import pprint
+
+def is_error(error_dict):
+  return "error" in error_dict
+
+class ExceptionFactory(object):
+  @classmethod
+  def generateException(self, error_dict):
+    #print("[ExceptionFactory.generateException] error_dict", error_dict)
+    #print(type(error_dict))
+    if error_dict["error"] == "No board selected.":
+      return BoardNotFound()
+    else:
+      return GenericError()
+
+class ArchiveException(Exception):
+  pass
+
+class BoardNotFound(ArchiveException):
+  """ the selected board does not exist """
+
+class GenericError(ArchiveException):
+  """ ask Woxxy about this. """
