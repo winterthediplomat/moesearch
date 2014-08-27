@@ -22,7 +22,7 @@ def search(board, **kwargs):
   if is_error(res):
     raise ExceptionFactory.generateException(res)
   res = res[0]
-  return map(Post, res["posts"])
+  return [Post(post_obj) for post_obj in res["posts"]]
 
 def thread(board, thread_num, latest_doc_id=-1, last_limit=-1):
   url = "https://api.archive.moe/thread"
