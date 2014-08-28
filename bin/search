@@ -1,7 +1,14 @@
 #!/usr/bin/python3
+from __future__ import unicode_literals, print_function
+
+#seems __future__.unicode_literals does not have any effect on py2 code. weird.
+
+import sys
+if sys.version_info[0] == 2:
+  reload(sys) #adds setdefaultencoding in the available attributes
+  sys.setdefaultencoding('utf-8')
 
 import moesearch
-import sys
 import argparse
 
 parser = argparse.ArgumentParser(description="Search on archive.moe")

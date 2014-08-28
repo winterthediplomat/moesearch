@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+from __future__ import unicode_literals, print_function
 """http://archive.moe/a/thread/112792840/#112792840"""
 import moesearch
 import re

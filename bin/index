@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+from __future__ import unicode_literals, print_function
 import moesearch
 import sys
 S = sys.argv
