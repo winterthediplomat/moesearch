@@ -10,4 +10,4 @@ BEWARE
 
 This software is experimental, use it at your own risk.
 For those who want to try this...  
-Py3k only, [PyPI archive](https://pypi.python.org/pypi/moesearch/)
+[PyPI archive](https://pypi.python.org/pypi/moesearch/)
