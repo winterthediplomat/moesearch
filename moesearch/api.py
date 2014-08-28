@@ -14,10 +14,10 @@ def index(board, page):
     res[thread_num] = IndexResult(res[thread_num])
   return res 
 
-def search(board, **kwargs):
+def search(**kwargs):
   url = "http://api.archive.moe/search"
   #print("[api.search] url", url)
-  kwargs["board"]=board
+  #kwargs["board"]=board
   res = requests.get(url, stream=False, params=kwargs).json()
   if is_error(res):
     raise ExceptionFactory.generateException(res)
