@@ -5,7 +5,7 @@ from .parser import *
 from .exceptions import is_error, ExceptionFactory
 from pprint import pprint
 
-def index(board, page):
+def index(board, page=1):
   res = requests.get("http://api.archive.moe/index", stream=False, 
           params = {"board": board, "page": int(page)}).json()
   if is_error(res):
