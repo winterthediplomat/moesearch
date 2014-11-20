@@ -77,7 +77,7 @@ class TestPost(unittest.TestCase):
 class TestSearch(unittest.TestCase):
   def setUp(self):
     #even though the doc says "board" is required, we can omit it.
-    self.muh_vampire_search = foolz.search(subject='vampires')
+    self.muh_vampire_search = None  #foolz.search(subject='vampires')
 
   def test_aretheyvampires(self):
     pass
