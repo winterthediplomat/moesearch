@@ -25,7 +25,7 @@ Fuck Woxxy.
 >>> print(moesearch.index("a", 1)["112834776"].op.media.media_link)
 http://data.archive.moe/board/a/image/1366/74/1366741186747.jpg
 >>> print(moesearch.post("a", 112766871).board.short_name)
-"a"
+a
 >>> print(moesearch.thread("a", 112800651).posts[0].comment)
 >>112800651
 I fucking went grocery shopping all the time when I was a kid. I didn't have qt lesbian friends to go with though.
