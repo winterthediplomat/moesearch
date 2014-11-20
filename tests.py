@@ -67,7 +67,7 @@ class TestPost(unittest.TestCase):
 
   def test_media_data(self):
     """ check media data are correct for the media post """
-    self.assertEqual("http://data.archive.moe/board/v/image/1401/68/1401683960835.jpg", self.media_post.media.media_link)
+    self.assertEqual("https://data.archive.moe/board/v/image/1401/68/1401683960835.jpg", self.media_post.media.media_link)
 
   def test_no_comment(self):
     """ if a post has no comment, it has to have an image/webm! """
@@ -77,7 +77,7 @@ class TestPost(unittest.TestCase):
 class TestSearch(unittest.TestCase):
   def setUp(self):
     #even though the doc says "board" is required, we can omit it.
-    self.muh_vampire_search = foolz.search(subject='vampires')
+    self.muh_vampire_search = None  #foolz.search(subject='vampires')
 
   def test_aretheyvampires(self):
     pass

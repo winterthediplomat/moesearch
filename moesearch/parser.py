@@ -18,6 +18,10 @@ class Post(object):
       else:
         self.__dict__[post_key] = post_dict[post_key]
 
+  @property
+  def has_media(self):
+    return self.media.media_filename != None
+
   def __repr__(self):
     return repr(self.__dict__)
 
