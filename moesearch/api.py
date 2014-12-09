@@ -21,7 +21,7 @@ def index(board, page=1):
           stream=False, verify=False,
           params = {"board": board, "page": int(page)})
   res = req.json()
-  __closeRequests(req)
+#  __closeRequests(req)
   if is_error(res):
     raise ExceptionFactory.generateException(res)
   for thread_num in res:
@@ -34,7 +34,7 @@ def search(**kwargs):
   #kwargs["board"]=board
   req = requests.get(url, stream=False, verify=False, params=kwargs)
   res = req.json()
-  __closeRequests(req)
+#  __closeRequests(req)
   if is_error(res):
     raise ExceptionFactory.generateException(res)
   res = res[0]
@@ -49,7 +49,7 @@ def thread(board, thread_num, latest_doc_id=-1, last_limit=-1):
     payload["last_limit"] = (int(last_limit))
   req = requests.get(url, stream=False, verify=False, params=payload)
   res = req.json()
-  __closeRequests(req)
+#  __closeRequests(req)
   if is_error(res):
     raise ExceptionFactory.generateException(res)
   return Thread(res)
@@ -58,7 +58,7 @@ def post(board, post_num):
   req = requests.get("https://api.archive.moe/post", verify=False,  stream=False,
                   params={"board":board, "num":post_num})
   res = req.json()
-  __closeRequests(req)
+#  __closeRequests(req)
   if is_error(res):
     raise ExceptionFactory.generateException(res)
   return Post(res)
