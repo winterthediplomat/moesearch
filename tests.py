@@ -76,12 +76,22 @@ class TestPost(unittest.TestCase):
 
 class TestSearch(unittest.TestCase):
   def setUp(self):
-    #even though the doc says "board" is required, we can omit it.
-    self.muh_vampire_search = None  #foolz.search(subject='vampires')
+    #we can't really omit the board
+    self.muh_vampire_search = foolz.search('a', subject='vampires')
+    #more than one board works too!
+    self.vampires_on_more_boards = foolz.search(['a', 'co'], subject='vampires')
+    
 
   def test_aretheyvampires(self):
-    pass
-    #self.assertEqual(0, sum(1 for post in self.muh_vampire_search if post.title.count("vampires")==0))
+    self.assertEqual(0, sum(1 for post in self.muh_vampire_search if post.title.lower().count("vampires")==0))
+    self.assertEqual(0, sum(1 for post in self.vampires_on_more_boards if post.title.lower().count("vampires")==0))
+
+  def test_gotsomething(self):
+    self.assertNotEqual(0, len(self.muh_vampire_search))
+    self.assertNotEqual(0, len(self.vampires_on_more_boards))
+
+  def test_actuallyfrommoreboards(self):
+    self.assertNotEqual(1, set(post.board.short_name for post in self.vampires_on_more_boards))
 
 if __name__ == "__main__":
   unittest.main()

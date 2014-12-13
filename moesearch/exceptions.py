@@ -14,6 +14,8 @@ class ExceptionFactory(object):
       return BoardNotFound("You have not selected a board, or the board you're looking for does not exist")
     elif error_dict["error"] == "Post not found.":
       return PostNotFound("Post not found")
+    elif error_dict["error"] == "Requested resource does not exist.":
+      return ResourceNotExists("Resource not found")
     else:
       return GenericError("Ehm... Please, go search some Jibril posts on /a/ while I figure it out: "+repr(error_dict))
 
@@ -26,5 +28,9 @@ class BoardNotFound(ArchiveException):
 class PostNotFound(ArchiveException):
   """ the selected post does not exist """
 
+class ResourceNotExists(ArchiveException):
+  """ the requested resource does not exist """
+
 class GenericError(ArchiveException):
   """ ask Woxxy about this. """
+
