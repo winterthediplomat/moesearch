@@ -19,7 +19,7 @@ Quickstart
 FoolFuuka docs are [at foolz.us](http://www.foolz.us/docs/foolfuuka/documentation.html#rest-api)
 ```py
 >>> import moesearch
->>> print(moesearch.search(text="woxxy")[2].comment)
+>>> print(moesearch.search(board="a", text="woxxy")[2].comment)
 >>112732805
 Fuck Woxxy.
 >>> print(moesearch.index("a", 1)["112834776"].op.media.media_link)

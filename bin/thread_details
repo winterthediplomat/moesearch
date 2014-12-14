@@ -3,18 +3,22 @@ from __future__ import unicode_literals, print_function
 """http://archive.moe/a/thread/112792840/#112792840"""
 import moesearch
 import re
-import sys
-S = sys.argv
+import argparse
+
+parser = argparse.ArgumentParser("thread_details")
+parser.add_argument("thread_url", help="the url of the thread. (http://archive.moe/a/thread/12345)")
 
 retrieve_post_num = lambda url: re.findall("\d+", url)[0]
 retrieve_board = lambda url: re.findall("/(\w+)/thread", url)[0]
 
-#print( retrieve_post_num(S[1]) )
-#print( retrieve_board(S[1]) )
-
-thread = moesearch.thread(retrieve_board(S[1]), retrieve_post_num(S[1]))
-
-print("(%s)"%thread.op.thread_num, thread.op.name, "wrote:", thread.op.comment)
-print(len(thread.posts), "commented this post!")
-for post in thread.posts:
-  print("(%s)"%post.num, post.name, "commented:", post.comment)
+if __name__ == "__main__":
+  args = parser.parse_args()
+  try:
+    thread = moesearch.thread(retrieve_board(args.thread_url),
+                            retrieve_post_num(args.thread_url))
+    print("(%s)"%thread.op.thread_num, thread.op.name, "wrote:", thread.op.comment)
+    print(len(thread.posts), "commented this post!")
+    for post in thread.posts:
+      print("(%s)"%post.num, post.name, "commented:", post.comment)
+  except moesearch.exceptions.ArchiveException as e:
+    print("gg, you broke the archive!", e)

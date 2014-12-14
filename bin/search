@@ -11,13 +11,31 @@ if sys.version_info[0] == 2:
 import moesearch
 import argparse
 
-parser = argparse.ArgumentParser(description="Search on archive.moe")
-parser.add_argument("--subject", help="the subject you're looking for")
-parser.add_argument("--board", default="a", help="the board you want to search on.")
-parser.add_argument("--text", help="the text you want to look for")
+parser = argparse.ArgumentParser(description="Search on archive.moe.")
+parser.add_argument("text", help="the text you may want to look for")
+parser.add_argument("--board", default="", help="the board you want to search on. select multiple board with --board=some,boards,i,like")
+parser.add_argument("--email", default=None, help="add the given email to the search filters")
+parser.add_argument("--username", default=None, help="add the given username to the search filter")
+parser.add_argument("--tripcode", default=None, help="add the given tripcode to the search filter")
+parser.add_argument("--capcode", default=None, help="add the given capcode to the search filter")
+parser.add_argument("--subject", default=None, help="search posts with the given subject on the archive")
+parser.add_argument("--filename", default=None, help="add the given filename to the search filter")
+parser.add_argument("--filehash", default=None, help="add the given filehash to the search filter")
+parser.add_argument("--deleted", default=None, type=bool, help="look for deleted only posts?")
+parser.add_argument("--ghost", default=None, type=bool, help="look for ghost posts only?")
+parser.add_argument("--filter", default=None, type=bool)
+parser.add_argument("--date_start", default=None, type=str)
+parser.add_argument("--date_end", default=None, type=str)
+parser.add_argument("--order", default=None, choices=["asc", "desc"])
+parser.add_argument("--page", default=1, type=int)
 
-args = parser.parse_args(sys.argv[1:])
-posts = moesearch.search(**vars(args))
+args = parser.parse_args()
+try:
+  args.board = args.board.replace(",", ".")
+  posts = moesearch.search(**vars(args))
+except moesearch.exceptions.ArchiveException as e:
+  print("Mashiron is not amused:", e)
+  sys.exit(1)
 
 for post in posts:
   print(post.num, "on", post.board.short_name)

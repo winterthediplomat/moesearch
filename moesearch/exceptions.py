@@ -2,35 +2,13 @@
 
 from pprint import pprint
 
-def is_error(error_dict):
-  return "error" in error_dict
-
-class ExceptionFactory(object):
-  @classmethod
-  def generateException(self, error_dict):
-    #print("[ExceptionFactory.generateException] error_dict", error_dict)
-    #print(type(error_dict))
-    if error_dict["error"] == "No board selected.":
-      return BoardNotFound("You have not selected a board, or the board you're looking for does not exist")
-    elif error_dict["error"] == "Post not found.":
-      return PostNotFound("Post not found")
-    elif error_dict["error"] == "Requested resource does not exist.":
-      return ResourceNotExists("Resource not found")
-    else:
-      return GenericError("Ehm... Please, go search some Jibril posts on /a/ while I figure it out: "+repr(error_dict))
-
 class ArchiveException(Exception):
-  pass
+  def __init__(self, response_dict):
+    super(Exception, self).__init__(response_dict["error"], response_dict)
 
-class BoardNotFound(ArchiveException):
-  """ the selected board does not exist or you have not selected a board """
-
-class PostNotFound(ArchiveException):
-  """ the selected post does not exist """
-
-class ResourceNotExists(ArchiveException):
-  """ the requested resource does not exist """
-
-class GenericError(ArchiveException):
-  """ ask Woxxy about this. """
-
+  @staticmethod
+  def is_error(response_dict):
+    try:
+      return list(response_dict.keys()) == ["error"]
+    except AttributeError: #that's a list, we're safe!
+      return False

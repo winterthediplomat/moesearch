@@ -1,10 +1,16 @@
 #!/usr/bin/python3
 
 from pprint import pprint
-from .exceptions import ExceptionFactory
+from .exceptions import ArchiveException
 from collections import namedtuple
 
-Board = namedtuple("Board", "short_name name")
+class Board(object):
+  def __init__(self, short_name, name=None):
+    self.short_name = short_name
+    self.name = name or ""
+
+  def __str__(self):
+    return self.short_name
 
 class Post(object):
   def __init__(self, post_dict):
@@ -53,8 +59,8 @@ class Thread(object):
 
 class IndexResult(Thread):
   def __init__(self, thread_dict):
-    if "error" in thread_dict:
-      raise ExceptionFactory.generateException(thread_dict)
+    if ArchiveException.is_error(thread_dict):
+      raise ArchiveException(thread_dict)
     Thread.__init__(self, thread_dict)
     self.omitted = thread_dict["omitted"]
     self.images_omitted = thread_dict["images_omitted"]
