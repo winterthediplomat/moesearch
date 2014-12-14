@@ -21,7 +21,7 @@ parser.add_argument("--capcode", default=None, help="add the given capcode to th
 parser.add_argument("--subject", default=None, help="search posts with the given subject on the archive")
 parser.add_argument("--filename", default=None, help="add the given filename to the search filter")
 parser.add_argument("--filehash", default=None, help="add the given filehash to the search filter")
-parser.add_argument("--deleted", default=None, type=bool, help="look for deleted only posts=")
+parser.add_argument("--deleted", default=None, type=bool, help="look for deleted only posts?")
 parser.add_argument("--ghost", default=None, type=bool, help="look for ghost posts only?")
 parser.add_argument("--filter", default=None, type=bool)
 parser.add_argument("--date_start", default=None, type=str)
