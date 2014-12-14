@@ -88,7 +88,11 @@ class TestSearch(unittest.TestCase):
     #we can't really omit the board
     self.muh_vampire_search = foolz.search(foolz.parser.Board('a'), subject='vampires')
     #more than one board works too!
-    self.vampires_on_more_boards = foolz.search(['a', 'co'], subject='vampires')
+    self.vampires_on_more_boards = foolz.search([
+                                                foolz.parser.Board('a'),
+                                                foolz.parser.Board('co')
+                                                ],
+                                                subject='vampires')
   
     
   def test_aretheyvampires(self):
