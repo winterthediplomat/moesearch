@@ -4,7 +4,13 @@ from pprint import pprint
 from .exceptions import ExceptionFactory
 from collections import namedtuple
 
-Board = namedtuple("Board", "short_name name")
+class Board(object):
+  def __init__(self, short_name, name=None):
+    self.short_name = short_name
+    self.name = name or ""
+
+  def __str__(self):
+    return self.short_name
 
 class Post(object):
   def __init__(self, post_dict):

@@ -13,6 +13,9 @@ def select_first_couple(dict_):
 class TestIndex(unittest.TestCase):
   def setUp(self):
     self.a_index = foolz.index("a", 1)
+
+  def test_workswithboardobj(self):
+    self.r9k_index = foolz.index(foolz.parser.Board('r9k'), 5)
   
   def test_boardexception(self):
     self.assertRaises(foolz.exceptions.BoardNotFound,
@@ -35,6 +38,9 @@ class TestIndex(unittest.TestCase):
 class TestThread(unittest.TestCase):
   def setUp(self):
     self.muh_thread = foolz.thread('a', 112800651)
+  
+  def test_workswithboardobj(self):
+    foolz.thread(foolz.parser.Board('a'), 112800651)
 
   def test_isthatyou(self):
     self.assertEqual(112800651, int(self.muh_thread.op.thread_num))
@@ -50,6 +56,9 @@ class TestPost(unittest.TestCase):
     self.media_post      = foolz.post('v', 260289496)
     self.no_media_post   = foolz.post('v', 260289610)
     self.no_comment_post = foolz.post('v', 260289384)
+
+  def test_workswithboardobj(self):
+    foolz.post(foolz.parser.Board('v'), 260289496)
 
   def test_isthatyou(self):
     """ check the response is the one we're looking for. """
@@ -77,9 +86,10 @@ class TestPost(unittest.TestCase):
 class TestSearch(unittest.TestCase):
   def setUp(self):
     #we can't really omit the board
-    self.muh_vampire_search = foolz.search('a', subject='vampires')
+    self.muh_vampire_search = foolz.search(foolz.parser.Board('a'), subject='vampires')
     #more than one board works too!
     self.vampires_on_more_boards = foolz.search(['a', 'co'], subject='vampires')
+  
     
   def test_aretheyvampires(self):
     self.assertEqual(0, sum(1 for post in self.muh_vampire_search if post.title.lower().count("vampires")==0))
