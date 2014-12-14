@@ -93,6 +93,7 @@ class TestSearch(unittest.TestCase):
                                                 foolz.parser.Board('co')
                                                 ],
                                                 subject='vampires')
+    self.kek_on_r9k = foolz.search('r9k', text='kek')
   
     
   def test_aretheyvampires(self):
@@ -104,7 +105,12 @@ class TestSearch(unittest.TestCase):
     self.assertNotEqual(0, len(self.vampires_on_more_boards))
 
   def test_actuallyfrommoreboards(self):
-    self.assertNotEqual(1, set(post.board.short_name for post in self.vampires_on_more_boards))
+    self.assertEqual(set(('a', 'co')), set(post.board.short_name for post in self.vampires_on_more_boards))
+
+  def test_longerboardsnotsplitted(self):
+    for post in self.kek_on_r9k:
+      self.assertNotEqual('k', post.board.short_name)
+      self.assertEqual('r9k', post.board.short_name)
 
 class TestUtilities(unittest.TestCase):
   def setUp(self):

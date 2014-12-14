@@ -1,19 +1,24 @@
 #!/usr/bin/python3
 
 from __future__ import unicode_literals, print_function
-"""http://archive.moe/a/thread/112792840/#112792840"""
+"""https://archive.moe/sci/thread/6900904/#6901240"""
 import moesearch
 import re
-import sys
-S = sys.argv
+import argparse
+
+parser = argparse.ArgumentParser("post_details")
+parser.add_argument("post_url", help="the post url (https://archive.moe/sci/thread/6900904/#6901240")
 
 retrieve_post_num = lambda url: re.findall("\d+$", url)[0]
 retrieve_board = lambda url: re.findall("/(\w+)/thread", url)[0]
 
-#print( retrieve_post_num(S[1]) )
-#print( retrieve_board(S[1]) )
-
-post = moesearch.post(retrieve_board(S[1]), retrieve_post_num(S[1]))
-print("this post is from:", post.name)
-print("comment", post.comment)
-print("image link", post.media.media_link)
+if __name__ == "__main__":
+  args = parser.parse_args()
+  try:
+    post = moesearch.post(retrieve_board(args.post_url),
+                          retrieve_post_num(args.post_url))
+    print("this post is from:", post.name)
+    print("comment", post.comment)
+    print("image link", post.media.media_link)
+  except moesearch.exceptions.ArchiveException as e:
+    print("you broke the archive!", e)
