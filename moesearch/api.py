@@ -2,7 +2,7 @@
 
 import requests
 from .parser import *
-from .exceptions import is_error, ExceptionFactory
+from .exceptions import ArchiveException
 from pprint import pprint
 
 #disabling warnings about unverified SSL certificates
@@ -15,8 +15,8 @@ def index(board, page=1):
           stream=False, verify=False,
           params = {"board": str(board), "page": int(page)})
   res = req.json()
-  if is_error(res):
-    raise ExceptionFactory.generateException(res)
+  if ArchiveException.is_error(res):
+    raise ArchiveException(res)
   for thread_num in res:
     res[thread_num] = IndexResult(res[thread_num])
   return res 
@@ -26,8 +26,8 @@ def search(board, **kwargs):
   kwargs["board"]=str(board)
   req = requests.get(url, stream=False, verify=False, params=kwargs)
   res = req.json()
-  if is_error(res):
-    raise ExceptionFactory.generateException(res)
+  if ArchiveException.is_error(res):
+    raise ArchiveException(res)
   res = res[0]
   return [Post(post_obj) for post_obj in res["posts"]]
 
@@ -40,14 +40,14 @@ def thread(board, thread_num, latest_doc_id=-1, last_limit=-1):
     payload["last_limit"] = (int(last_limit))
   req = requests.get(url, stream=False, verify=False, params=payload)
   res = req.json()
-  if is_error(res):
-    raise ExceptionFactory.generateException(res)
+  if ArchiveException.is_error(res):
+    raise ArchiveException(res)
   return Thread(res)
 
 def post(board, post_num):
   req = requests.get("https://api.archive.moe/post", verify=False,  stream=False,
                   params={"board":str(board), "num":post_num})
   res = req.json()
-  if is_error(res):
-    raise ExceptionFactory.generateException(res)
+  if ArchiveException.is_error(res):
+    raise ArchiveException(res)
   return Post(res)

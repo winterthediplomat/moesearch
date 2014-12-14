@@ -18,7 +18,7 @@ class TestIndex(unittest.TestCase):
     self.r9k_index = foolz.index(foolz.parser.Board('r9k'), 5)
   
   def test_boardexception(self):
-    self.assertRaises(foolz.exceptions.BoardNotFound,
+    self.assertRaises(foolz.exceptions.ArchiveException,
                       foolz.index,
                       #parameters
                       "welovewoxxy", 1

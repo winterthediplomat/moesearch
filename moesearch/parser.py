@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 from pprint import pprint
-from .exceptions import ExceptionFactory
+from .exceptions import ArchiveException
 from collections import namedtuple
 
 class Board(object):
@@ -59,8 +59,8 @@ class Thread(object):
 
 class IndexResult(Thread):
   def __init__(self, thread_dict):
-    if "error" in thread_dict:
-      raise ExceptionFactory.generateException(thread_dict)
+    if ArchiveException.is_error(thread_dict):
+      raise ArchiveException(thread_dict)
     Thread.__init__(self, thread_dict)
     self.omitted = thread_dict["omitted"]
     self.images_omitted = thread_dict["images_omitted"]
