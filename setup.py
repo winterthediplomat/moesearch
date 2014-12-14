@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='moesearch',
-    version='0.1.2',
+    version='0.1.6',
     author='alfateam123',
     author_email='alfateam123@gmail.com',
     packages=['moesearch'],
@@ -13,7 +13,7 @@ setup(
     description='archive.moe Search REST API Library',
     long_description=open('README.md').read(),
     install_requires=[
-        "requests >= 2.3.0"
+        "requests >= 2.5.0"
     ],
     classifiers=[
     "Development Status :: 4 - Beta",

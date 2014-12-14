@@ -11,20 +11,21 @@ from pprint import pprint
 requests.packages.urllib3.disable_warnings()
 
 def index(board, page=1):
-  res = requests.get("https://api.archive.moe/index",
+  req = requests.get("https://api.archive.moe/index",
           stream=False, verify=False,
-          params = {"board": board, "page": int(page)}).json()
+          params = {"board": board, "page": int(page)})
+  res = req.json()
   if is_error(res):
     raise ExceptionFactory.generateException(res)
   for thread_num in res:
     res[thread_num] = IndexResult(res[thread_num])
   return res 
 
-def search(**kwargs):
+def search(board, **kwargs):
   url = "https://api.archive.moe/search"
-  #print("[api.search] url", url)
-  #kwargs["board"]=board
-  res = requests.get(url, stream=False, verify=False, params=kwargs).json()
+  kwargs["board"]=board
+  req = requests.get(url, stream=False, verify=False, params=kwargs)
+  res = req.json()
   if is_error(res):
     raise ExceptionFactory.generateException(res)
   res = res[0]
@@ -37,14 +38,16 @@ def thread(board, thread_num, latest_doc_id=-1, last_limit=-1):
     payload["latest_doc_id"] = (int(latest_doc_id))
   if(last_limit != -1):
     payload["last_limit"] = (int(last_limit))
-  res = requests.get(url, stream=False, verify=False, params=payload).json()
+  req = requests.get(url, stream=False, verify=False, params=payload)
+  res = req.json()
   if is_error(res):
     raise ExceptionFactory.generateException(res)
   return Thread(res)
 
 def post(board, post_num):
-  res = requests.get("https://api.archive.moe/post", verify=False,  stream=False,
-                  params={"board":board, "num":post_num}).json()
+  req = requests.get("https://api.archive.moe/post", verify=False,  stream=False,
+                  params={"board":board, "num":post_num})
+  res = req.json()
   if is_error(res):
     raise ExceptionFactory.generateException(res)
   return Post(res)
