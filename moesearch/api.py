@@ -12,7 +12,7 @@ requests.packages.urllib3.disable_warnings()
 
 def index(board, page=1):
   req = requests.get("https://api.archive.moe/index",
-          stream=False, verify=False,
+          stream=False, verify=True,
           params = {"board": str(board), "page": int(page)})
   res = req.json()
   if ArchiveException.is_error(res):
@@ -30,7 +30,7 @@ def search(board, **kwargs):
     kwargs["boards"] = ".".join([str(b) for b in board]) #we got a list of boards!
   except TypeError: #it's not an iterable (probably a Board object): try to convert it
     kwargs["boards"] = str(board)
-  req = requests.get(url, stream=False, verify=False, params=kwargs)
+  req = requests.get(url, stream=False, verify=True, params=kwargs)
   res = req.json()
   if ArchiveException.is_error(res):
     raise ArchiveException(res)
@@ -44,14 +44,14 @@ def thread(board, thread_num, latest_doc_id=-1, last_limit=-1):
     payload["latest_doc_id"] = (int(latest_doc_id))
   if(last_limit != -1):
     payload["last_limit"] = (int(last_limit))
-  req = requests.get(url, stream=False, verify=False, params=payload)
+  req = requests.get(url, stream=False, verify=True, params=payload)
   res = req.json()
   if ArchiveException.is_error(res):
     raise ArchiveException(res)
   return Thread(res)
 
 def post(board, post_num):
-  req = requests.get("https://api.archive.moe/post", verify=False,  stream=False,
+  req = requests.get("https://api.archive.moe/post", verify=True,  stream=False,
                   params={"board":str(board), "num":post_num})
   res = req.json()
   if ArchiveException.is_error(res):
