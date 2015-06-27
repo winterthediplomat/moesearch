@@ -25,11 +25,12 @@ def search(board, **kwargs):
   url = "https://api.archive.moe/search"
   try:
     kwargs["boards"] = board.lower() #it's a string?
-  except AttributeError: 
+  except AttributeError:
+    try: 
     #https://github.com/FoolCode/FoolFuuka/blob/master/src/Controller/Api/Chan.php#L337
-    kwargs["boards"] = ".".join([str(b) for b in board]) #we got a list of boards!
-  except TypeError: #it's not an iterable (probably a Board object): try to convert it
-    kwargs["boards"] = str(board)
+      kwargs["boards"] = ".".join([str(b) for b in board]) #we got a list of boards!
+    except TypeError: #it's not an iterable (probably a Board object): try to convert it
+      kwargs["boards"] = str(board)
   req = requests.get(url, stream=False, verify=True, params=kwargs)
   res = req.json()
   if ArchiveException.is_error(res):
