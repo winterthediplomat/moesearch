@@ -1,7 +1,8 @@
 MoeSearch
 =========
 
-A stupid Python library for [archive.moe](https://archive.moe) (ex FoolzArchive) REST API.
+A stupid Python library for [desustorage.org]http://desustorage.org/) (dump retrived from archive.moe, that was previously known as FoolzArchive) REST API.  
+To be fair, actually it should work with every installation of FoolFuuka, but yve have to try that.
 
 Useless binaries included.
 
@@ -16,7 +17,7 @@ Quickstart
 --------
 
 (You can check the executables in /bin folder).
-FoolFuuka docs are [at foolz.us](http://www.foolz.us/docs/foolfuuka/documentation.html#rest-api)
+FoolFuuka docs are available [at foolz.us](https://web.archive.org/web/20140728111047/http://www.foolz.us/docs/foolfuuka/documentation.html).  
 ```py
 >>> import moesearch
 >>> print(moesearch.search(board="a", text="woxxy")[2].comment)

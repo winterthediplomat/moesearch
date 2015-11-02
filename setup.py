@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='moesearch',
-    version='0.1.8.1',
+    version='0.2.0',
     author='alfateam123',
     author_email='alfateam123@gmail.com',
     packages=['moesearch'],
