@@ -1,8 +1,8 @@
 MoeSearch
 =========
 
-A stupid Python library for [desustorage.org]http://desustorage.org/) (dump retrived from archive.moe, that was previously known as FoolzArchive) REST API.  
-To be fair, actually it should work with every installation of FoolFuuka, but yve have to try that.
+A stupid Python library for [desustorage.org](http://desustorage.org/) (dump retrived from archive.moe, that was previously known as FoolzArchive) REST API.  
+To be fair, actually it should work with every installation of FoolFuuka, but you have to try that.
 
 Useless binaries included.
 
