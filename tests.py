@@ -37,13 +37,13 @@ class TestIndex(unittest.TestCase):
 
 class TestThread(unittest.TestCase):
   def setUp(self):
-    self.muh_thread = foolz.thread('a', 112800651)
+    self.muh_thread = foolz.thread('co', 77173065)
   
   def test_workswithboardobj(self):
-    foolz.thread(foolz.parser.Board('a'), 112800651)
+    foolz.thread(foolz.parser.Board('co'), 77173065)
 
   def test_isthatyou(self):
-    self.assertEqual(112800651, int(self.muh_thread.op.thread_num))
+    self.assertEqual(77173065, int(self.muh_thread.op.thread_num))
     self.assertIsInstance(self.muh_thread, foolz.parser.Thread)
 
   def test_thread_isnota_indexresult(self):
@@ -53,20 +53,20 @@ class TestThread(unittest.TestCase):
 
 class TestPost(unittest.TestCase):
   def setUp(self):
-    self.media_post      = foolz.post('v', 260289496)
-    self.no_media_post   = foolz.post('v', 260289610)
-    self.no_comment_post = foolz.post('v', 260289384)
+    self.media_post      = foolz.post('fit', 34763974)
+    self.no_media_post   = foolz.post('fit', 34767518)
+    self.no_comment_post = foolz.post('a', 133062380)
 
   def test_workswithboardobj(self):
-    foolz.post(foolz.parser.Board('v'), 260289496)
+    foolz.post(foolz.parser.Board('fit'), 34763974)
 
   def test_isthatyou(self):
     """ check the response is the one we're looking for. """
-    self.assertEqual('v', self.media_post.board.short_name)
-    self.assertEqual('v', self.no_media_post.board.short_name)
-    self.assertEqual(260289384, int(self.no_comment_post.num))
-    self.assertEqual(260289496, int(self.media_post.num))
-    self.assertEqual(260289610, int(self.no_media_post.num))
+    self.assertEqual('fit', self.media_post.board.short_name)
+    self.assertEqual('fit', self.no_media_post.board.short_name)
+    self.assertEqual(133062380, int(self.no_comment_post.num))
+    self.assertEqual(34763974, int(self.media_post.num))
+    self.assertEqual(34767518, int(self.no_media_post.num))
   
   def test_nomedia_hasattributes(self):
     """ don't crash when asking media data to a no-media post """
@@ -76,7 +76,7 @@ class TestPost(unittest.TestCase):
 
   def test_media_data(self):
     """ check media data are correct for the media post """
-    self.assertEqual("https://data.archive.moe/board/v/image/1401/68/1401683960835.jpg", self.media_post.media.media_link)
+    self.assertEqual("https://data.desustorage.org/4ch/fit/image/1444/85/1444858212551.jpg", self.media_post.media.media_link)
 
   def test_no_comment(self):
     """ if a post has no comment, it has to have an image/webm! """
@@ -92,13 +92,13 @@ class TestSearch(unittest.TestCase):
                                                 foolz.parser.Board('a'),
                                                 foolz.parser.Board('co')
                                                 ],
-                                                subject='vampires')
+                                                text='vampires')
     self.kek_on_r9k = foolz.search('r9k', text='kek')
   
     
   def test_aretheyvampires(self):
     self.assertEqual(0, sum(1 for post in self.muh_vampire_search if post.title.lower().count("vampires")==0))
-    self.assertEqual(0, sum(1 for post in self.vampires_on_more_boards if post.title.lower().count("vampires")==0))
+    self.assertEqual(0, sum(1 for post in self.vampires_on_more_boards if post.comment.lower().count("vampires")==0))
 
   def test_gotsomething(self):
     self.assertNotEqual(0, len(self.muh_vampire_search))
@@ -114,11 +114,12 @@ class TestSearch(unittest.TestCase):
 
 class TestUtilities(unittest.TestCase):
   def setUp(self):
-    self.cool_thread = foolz.thread('co', 37108096)
+    self.cool_thread = foolz.thread('co', 77173065)
 
   def test_cangetmediaposts(self):
     self.assertNotEqual(0, len(list(foolz.media_in_thread(self.cool_thread))))
-    self.assertEqual(196, len(list(foolz.media_in_thread(self.cool_thread))))
+    #that test is waaaay too specific.
+    #self.assertEqual(196, len(list(foolz.media_in_thread(self.cool_thread))))
 
   #TODO: add tests for differences between posts with and without OP media
 
