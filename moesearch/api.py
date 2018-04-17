@@ -10,7 +10,7 @@ from pprint import pprint
 #urllib3 being missing.
 requests.packages.urllib3.disable_warnings()
 
-DESUSTORAGE_API_URL = "https://desustorage.org/_/api/chan"
+DESUSTORAGE_API_URL = "https://desuarchive.org/_/api/chan"
 
 def index(board, page=1):
   req = requests.get("{}/index".format(DESUSTORAGE_API_URL),
@@ -38,7 +38,7 @@ def search(board, **kwargs):
   res = req.json()
   if ArchiveException.is_error(res):
     raise ArchiveException(res)
-  res = res[0]
+  res = res['0']
   return [Post(post_obj) for post_obj in res["posts"]]
 
 def thread(board, thread_num, latest_doc_id=-1, last_limit=-1):
