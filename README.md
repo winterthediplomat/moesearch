@@ -1,7 +1,7 @@
 MoeSearch
 =========
 
-A Python library for [desuarchive.org](https://desuarchive.org/) and [RebeccaBlackTech](https://rbt.asia) REST API.  
+A Python library for [desuarchive.org](https://desuarchive.org/), [RebeccaBlackTech](https://rbt.asia), [archive.4plebs.org](https://archive.4plebs.org) REST API.  
 Theoretically, it should work with every installation of FoolFuuka, but 4plebs apparently needs to be fixed to their updated definition of the FoolFuuka API before it will work.
 
 Helpful binaries included.
@@ -9,7 +9,7 @@ Helpful binaries included.
 Disclaimer
 ------
 
-This codebase was fixed from the [moesearch](https://pypi.org/project/moesearch/) library, which became broken due to a hardcoded domain. We made the URL a function argument (so you can use it with rbt.asia, though not warosu, which is fuuka). We also plan to make this compatible with [the 4plebs definition of the FoolFuuka API.](https://4plebs.tech/foolfuuka/) Finally we have to fix the unit tests to work on whatever method we use to set `archiver_url`.
+This codebase was fixed from the [moesearch](https://pypi.org/project/moesearch/) library, which became broken due to a hardcoded domain. We made the URL a function argument (so you can use it with rbt.asia, though not warosu, which is fuuka). Finally we have to fix the unit tests to work on whatever method we use to set `archiver_url`.
 
 This software is experimental, use it at your own risk.
 
@@ -17,7 +17,7 @@ Quickstart
 --------
 
 (You can check the executables in /bin folder).
-FoolFuuka docs are available [at foolz.us](https://web.archive.org/web/20140728111047/http://www.foolz.us/docs/foolfuuka/documentation.html).  
+FoolFuuka API docs are available [at 4plebs.org.](https://4plebs.tech/foolfuuka/).  
 ```py
 >>> import moesearch
 >>> print(moesearch.search(archiver_url="https://desuarchive.org", board="a", text="woxxy")[2].comment)
