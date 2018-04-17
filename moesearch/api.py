@@ -10,11 +10,12 @@ from pprint import pprint
 #urllib3 being missing.
 requests.packages.urllib3.disable_warnings()
 
-ARCHIVER_URL = "https://desuarchive.org"
-FOOLFUUKA_API_URL = "%s/_/api/chan" % ARCHIVER_URL
+# archiver_url is now an argument, so you can use https://archived.moe, https://rbt.asia, or https://4plebs.org
+#archiver_url = "https://desuarchive.org"
+FOOLFUUKA_API_URL = "%s/_/api/chan"
 
-def index(board, page=1):
-  req = requests.get("{}/index".format(FOOLFUUKA_API_URL),
+def index(archiver_url, board, page=1):
+  req = requests.get("{}/index".format(FOOLFUUKA_API_URL % archiver_url),
           stream=False, verify=False,
           params = {"board": str(board), "page": int(page)})
   #print(req.content)
@@ -25,8 +26,8 @@ def index(board, page=1):
     res[thread_num] = IndexResult(res[thread_num])
   return res 
 
-def search(board, **kwargs):
-  url = "{}/search".format(FOOLFUUKA_API_URL)
+def search(archiver_url, board, **kwargs):
+  url = "{}/search".format(FOOLFUUKA_API_URL % archiver_url)
   try:
     kwargs["boards"] = board.lower() #it's a string?
   except AttributeError:
@@ -42,8 +43,8 @@ def search(board, **kwargs):
   res = res['0']
   return [Post(post_obj) for post_obj in res["posts"]]
 
-def thread(board, thread_num, latest_doc_id=-1, last_limit=-1):
-  url = "{}/thread".format(FOOLFUUKA_API_URL)
+def thread(archiver_url, board, thread_num, latest_doc_id=-1, last_limit=-1):
+  url = "{}/thread".format(FOOLFUUKA_API_URL % archiver_url)
   payload = {"board": str(board), "num": thread_num}
   if(latest_doc_id != -1):
     payload["latest_doc_id"] = (int(latest_doc_id))
@@ -55,8 +56,8 @@ def thread(board, thread_num, latest_doc_id=-1, last_limit=-1):
     raise ArchiveException(res)
   return Thread(res)
 
-def post(board, post_num):
-  req = requests.get("{}/post".format(FOOLFUUKA_API_URL),
+def post(archiver_url, board, post_num):
+  req = requests.get("{}/post".format(FOOLFUUKA_API_URL % archiver_url),
                   verify=True,  stream=False,
                   params={"board":str(board), "num":post_num})
   res = req.json()

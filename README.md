@@ -1,19 +1,17 @@
 MoeSearch
 =========
 
-A Python library for [desuarchive.org](http://desuarchive.org/) (dump retrived from archive.moe, that was previously known as FoolzArchive) REST API.  
-To be fair, actually it should work with every installation of FoolFuuka, but you have to try that.
+A Python library for [desuarchive.org](https://desuarchive.org/) and [RebeccaBlackTech](https://rbt.asia) REST API.  
+Theoretically, it should work with every installation of FoolFuuka, but 4plebs apparently needs to be fixed to their updated definition of the FoolFuuka API before it will work.
 
 Helpful binaries included.
 
-Fixed from the [moesearch](https://pypi.org/project/moesearch/) library, which became broken due to a hardcoded domain. We plan to make the URL a constructor argument (so you can use it with 4plebs, rbt.asia, though not warosu, which is fuuka). We also plan to make this compatible with [the 4plebs definition of the FoolFuuka API.](https://4plebs.tech/foolfuuka/)
-
-BEWARE
+Disclaimer
 ------
 
+This codebase was fixed from the [moesearch](https://pypi.org/project/moesearch/) library, which became broken due to a hardcoded domain. We made the URL a function argument (so you can use it with rbt.asia, though not warosu, which is fuuka). We also plan to make this compatible with [the 4plebs definition of the FoolFuuka API.](https://4plebs.tech/foolfuuka/) Finally we have to fix the unit tests to work on whatever method we use to set `archiver_url`.
+
 This software is experimental, use it at your own risk.
-For those who want to try this...  
-[PyPI archive](https://pypi.python.org/pypi/moesearch/)
 
 Quickstart
 --------
@@ -22,14 +20,14 @@ Quickstart
 FoolFuuka docs are available [at foolz.us](https://web.archive.org/web/20140728111047/http://www.foolz.us/docs/foolfuuka/documentation.html).  
 ```py
 >>> import moesearch
->>> print(moesearch.search(board="a", text="woxxy")[2].comment)
+>>> print(moesearch.search(archiver_url="https://desuarchive.org", board="a", text="woxxy")[2].comment)
 >>112732805
 Fuck Woxxy.
->>> print(moesearch.index("a", 1)["112834776"].op.media.media_link)
-http://data.archive.moe/board/a/image/1366/74/1366741186747.jpg
->>> print(moesearch.post("a", 112766871).board.short_name)
+>>> print(archiver_url="https://desuarchive.org", moesearch.index("a", 1)["112834776"].op.media.media_link)
+http://cdn2.desu-usergeneratedcontent.xyz/a/image/1366/74/1366741186747.jpg
+>>> print(archiver_url="https://desuarchive.org", moesearch.post("a", 112766871).board.short_name)
 a
->>> print(moesearch.thread("a", 112800651).posts[0].comment)
+>>> print(moesearch.thread(archiver_url="https://desuarchive.org", "a", 112800651).posts[0].comment)
 >>112800651
 I fucking went grocery shopping all the time when I was a kid. I didn't have qt lesbian friends to go with though.
 ```

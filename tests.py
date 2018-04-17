@@ -76,7 +76,7 @@ class TestPost(unittest.TestCase):
 
   def test_media_data(self):
     """ check media data are correct for the media post """
-    self.assertEqual("https://data.desustorage.org/fit/image/1444/85/1444858212551.jpg", self.media_post.media.media_link)
+    self.assertEqual("https://cdn2.desu-usergeneratedcontent.xyz/fit/image/1444/85/1444858212551.jpg", self.media_post.media.media_link)
 
   def test_no_comment(self):
     """ if a post has no comment, it has to have an image/webm! """
