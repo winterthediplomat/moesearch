@@ -1,10 +1,12 @@
 MoeSearch
 =========
 
-A stupid Python library for [desustorage.org](http://desustorage.org/) (dump retrived from archive.moe, that was previously known as FoolzArchive) REST API.  
+A Python library for [desuarchive.org](http://desuarchive.org/) (dump retrived from archive.moe, that was previously known as FoolzArchive) REST API.  
 To be fair, actually it should work with every installation of FoolFuuka, but you have to try that.
 
-Useless binaries included.
+Helpful binaries included.
+
+Fixed from the [moesearch](https://pypi.org/project/moesearch/) library, which became broken due to a hardcoded domain. We plan to make the URL a constructor argument (so you can use it with 4plebs, rbt.asia, though not warosu, which is fuuka). We also plan to make this compatible with [the 4plebs definition of the FoolFuuka API.](https://4plebs.tech/foolfuuka/)
 
 BEWARE
 ------
