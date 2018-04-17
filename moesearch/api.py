@@ -10,10 +10,11 @@ from pprint import pprint
 #urllib3 being missing.
 requests.packages.urllib3.disable_warnings()
 
-DESUSTORAGE_API_URL = "https://desuarchive.org/_/api/chan"
+ARCHIVER_URL = "https://desuarchive.org"
+FOOLFUUKA_API_URL = "%s/_/api/chan" % ARCHIVER_URL
 
 def index(board, page=1):
-  req = requests.get("{}/index".format(DESUSTORAGE_API_URL),
+  req = requests.get("{}/index".format(FOOLFUUKA_API_URL),
           stream=False, verify=False,
           params = {"board": str(board), "page": int(page)})
   #print(req.content)
@@ -25,7 +26,7 @@ def index(board, page=1):
   return res 
 
 def search(board, **kwargs):
-  url = "{}/search".format(DESUSTORAGE_API_URL)
+  url = "{}/search".format(FOOLFUUKA_API_URL)
   try:
     kwargs["boards"] = board.lower() #it's a string?
   except AttributeError:
@@ -42,7 +43,7 @@ def search(board, **kwargs):
   return [Post(post_obj) for post_obj in res["posts"]]
 
 def thread(board, thread_num, latest_doc_id=-1, last_limit=-1):
-  url = "{}/thread".format(DESUSTORAGE_API_URL)
+  url = "{}/thread".format(FOOLFUUKA_API_URL)
   payload = {"board": str(board), "num": thread_num}
   if(latest_doc_id != -1):
     payload["latest_doc_id"] = (int(latest_doc_id))
@@ -55,7 +56,7 @@ def thread(board, thread_num, latest_doc_id=-1, last_limit=-1):
   return Thread(res)
 
 def post(board, post_num):
-  req = requests.get("{}/post".format(DESUSTORAGE_API_URL),
+  req = requests.get("{}/post".format(FOOLFUUKA_API_URL),
                   verify=True,  stream=False,
                   params={"board":str(board), "num":post_num})
   res = req.json()
