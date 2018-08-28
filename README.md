@@ -2,16 +2,8 @@ MoeSearch
 =========
 
 A Python library for [desuarchive.org](https://desuarchive.org/), [RebeccaBlackTech](https://rbt.asia), [archive.4plebs.org](https://archive.4plebs.org) REST API.  
-Theoretically, it should work with every installation of FoolFuuka, but 4plebs apparently needs to be fixed to their updated definition of the FoolFuuka API before it will work.
 
 Helpful binaries included.
-
-Disclaimer
-------
-
-This codebase was fixed from the [moesearch](https://pypi.org/project/moesearch/) library, which became broken due to a hardcoded domain. We made the URL a function argument (so you can use it with rbt.asia, though not warosu, which is fuuka). Finally we have to fix the unit tests to work on whatever method we use to set `archiver_url`.
-
-This software is experimental, use it at your own risk.
 
 Quickstart
 --------
@@ -23,11 +15,11 @@ FoolFuuka API docs are available [at 4plebs.org.](https://4plebs.tech/foolfuuka/
 >>> print(moesearch.search(archiver_url="https://desuarchive.org", board="a", text="woxxy")[2].comment)
 >>112732805
 Fuck Woxxy.
->>> print(archiver_url="https://desuarchive.org", moesearch.index("a", 1)["112834776"].op.media.media_link)
+>>> print(moesearch.index("https://desuarchive.org", "a", 1)["112834776"].op.media.media_link)
 http://cdn2.desu-usergeneratedcontent.xyz/a/image/1366/74/1366741186747.jpg
->>> print(archiver_url="https://desuarchive.org", moesearch.post("a", 112766871).board.short_name)
+>>> print(moesearch.post("https://desuarchive.org, ""a", 112766871).board.short_name)
 a
->>> print(moesearch.thread(archiver_url="https://desuarchive.org", "a", 112800651).posts[0].comment)
+>>> print(moesearch.thread("https://desuarchive.org", "a", 112800651).posts[0].comment)
 >>112800651
 I fucking went grocery shopping all the time when I was a kid. I didn't have qt lesbian friends to go with though.
 ```
